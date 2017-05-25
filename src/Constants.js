@@ -7,7 +7,8 @@ var Config = require('./config.json');
 
 var visualizationTypes = {
     basic: 'basic',
-    variant: 'variant'
+    variant: 'variant',
+    continuous: 'continuous'
 };
 var uniprotSource = 'uniprot';
 var uniprotSources = [
@@ -42,6 +43,9 @@ var consequenceTypes = [];
 
 var Constants = function() {
   return {
+    extend_categories: function(){
+      extend_categories( allCategories );
+    },
     getBlastURL: function() {
         return 'http://www.uniprot.org/blast/?about=';
     },

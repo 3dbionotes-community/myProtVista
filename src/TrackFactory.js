@@ -9,6 +9,7 @@ var FeatureFactory = require("./FeatureFactory");
 var NonOverlappingLayout = require("./NonOverlappingLayout");
 var BasicViewer = require("./BasicViewer");
 var VariantViewer = require("./VariantViewer");
+var ContinuousViewer = require("./ContinuousViewer");
 var Constants = require("./Constants");
 
 var Track = function(typeFeatures, category) {
@@ -43,6 +44,13 @@ var VariantTrackViewer = function(track) {
     );
 };
 
+var ContinuousTrackViewer = function(track) {
+    return new ContinuousViewer(
+        track.category.name, track.data, track.trackContainer, track.category.fv, track.variantHeight
+        , track.titleContainer
+    );
+};
+
 Track.basic = function() {
     var self = this;
     var trackInfo = Constants.getTrackInfo(self.type.toLowerCase());
@@ -57,6 +65,17 @@ Track.variant = function() {
     this.titleContainer.attr('class', 'up_pftv_track-header')
         .attr('style','height:' + this.variantHeight + 'px');
     this.trackViewer = new VariantTrackViewer(this);
+
+    this.reset = function() {
+        this.trackViewer.reset();
+    };
+};
+
+Track.continuous = function() {
+    this.variantHeight = 430;
+    this.titleContainer.attr('class', 'up_pftv_track-header')
+        .attr('style','height:' + this.variantHeight + 'px');
+    this.trackViewer = new ContinuousTrackViewer(this);
 
     this.reset = function() {
         this.trackViewer.reset();

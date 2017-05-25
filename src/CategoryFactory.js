@@ -13,6 +13,7 @@ var ViewerHelper = require("./ViewerHelper");
 var Constants = require("./Constants");
 var Evidence = require('./Evidence');
 var VariantCategoryViewer = require('./VariantCategoryViewer');
+var ContinuousCategoryViewer = require('./ContinuousCategoryViewer');
 
 var Category = function(name, data, catInfo, fv, container) {
     var category = this;
@@ -174,6 +175,10 @@ Category.basic = function() {
 
 Category.variant = function() {
     this.categoryViewer = new VariantCategoryViewer(this);
+};
+
+Category.continuous = function() {
+    this.categoryViewer = new ContinuousCategoryViewer(this);
 };
 
 // Factory

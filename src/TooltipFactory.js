@@ -123,8 +123,8 @@ var addConsequence = function(tooltip, consequence) {
 var addDescription = function(tooltip, description){
     if (description) {
         var dataDes = tooltip.table.append('tr');
-        dataDes.append('td').text('Description');
-        dataDes.append('td').text(description);
+        dataDes.append('td').html('Description');//dataDes.append('td').text('Description');
+        dataDes.append('td').html(description);//dataDes.append('td').text(description);
     }
 };
 
@@ -163,6 +163,7 @@ var Tooltip = function(fv, catTitle, d, container, coordinates) {
     var tooltipTitle = tooltip.data.type + ' ' + tooltip.data.begin +
         (tooltip.data.end && (tooltip.data.end !== tooltip.data.begin) ? '-' + tooltip.data.end : '');
     descRow.append('th').attr('colspan',2).text(tooltipTitle);
+    tooltip.table = tooltip.table.append('div').append('table');
 
     var keys = tooltip.data.externalData ? _.keys(tooltip.data.externalData).join(', ') : undefined;
     if (keys || (tooltip.data.sourceType !== undefined)) {
@@ -517,6 +518,9 @@ Tooltip.init_codon = function() {
 };
 Tooltip.variant = function() {
     this.tooltipViewer = new VariantTooltipViewer(this);
+};
+Tooltip.measure = function() {
+    this.tooltipViewer = new BasicTooltipViewer(this);
 };
 
 var TooltipFactory = function() {

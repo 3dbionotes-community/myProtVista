@@ -64,7 +64,24 @@ var symbolSize = 10,
         init_codon:'variant',//CHECK
         //proteomics
         unique:'rectangle',
-        non_unique:'rectangle'
+        non_unique:'rectangle',
+
+        mod_res_pho: "triangle",
+        mod_res_met: "triangle",
+        mod_res_ace: "triangle",
+        mod_res_cro: "triangle",
+        mod_res_cit: "triangle",
+        mod_res_sum: "triangle",
+        mod_res_ubi: "triangle",
+        pfam_domain:'rectangle',
+        interpro_domain:'rectangle',
+        smart_domain:'rectangle',
+        disprot: 'rectangle',
+        pdb_xray: 'rectangle',
+        pdb_nmr: 'rectangle',
+        crosslnk:'triangle',
+        linear_motif:'rectangle',
+        linear_epitope:'rectangle'
     };
 
 var Feature = function() {

@@ -412,6 +412,7 @@ var initSources = function (opts) {
 var loadSources = function(opts, dataSources, loaders, delegates, fv) {
     fv.initLayout(opts);
     _.each(dataSources, function(source, index) {
+        fv.n_source += 1;
         if (!_.contains(opts.exclusions, source.category)) {
             var url = source.url + opts.uniprotacc;
             url = source.useExtension === true ? url + '.json' : url;
@@ -432,12 +433,14 @@ var loadSources = function(opts, dataSources, loaders, delegates, fv) {
                     features = _.filter(features, function (cat) {
                         return !_.contains(opts.exclusions, cat[0]);
                     });
+                    extend_features(features);
                 } else if (features.length > 0 && features[0].type === 'VARIANT') {
                     if (_.contains(opts.exclusions, 'VARIATION')) {
                         features = [];
                     } else {
                         features = DataLoader.processVariants(features, d.sequence, source.source);
                     }
+                    extend_variants(features);
                 } else if (features.length > 0 && features[0].type === 'PROTEOMICS') {
                     if (_.contains(opts.exclusions, 'PROTEOMICS')) {
                         features = [];
@@ -447,6 +450,9 @@ var loadSources = function(opts, dataSources, loaders, delegates, fv) {
                 } else if (features.length > 0) {
                     features = DataLoader.processUngroupedFeatures(features);
                 }
+                if(!features_extended && source.category == "FEATURES"){
+                  extend_features(features);
+                }
                 if (features.length >= 0) {
                     fv.drawCategories(features, fv);
                     fv.data = fv.data.concat(features);
@@ -454,6 +460,16 @@ var loadSources = function(opts, dataSources, loaders, delegates, fv) {
                 }
             }).fail(function (e) {
                 console.log(e);
+                if(source.category == 'VARIATION'){
+                  var features = [];
+                  features = DataLoader.processVariants(features, fv.sequence, source.source);
+                  extend_variants(features);
+                  if(variants_extended){
+                    fv.drawCategories(features, fv);
+                    fv.data = fv.data.concat(features);
+                    fv.dispatcher.ready();
+                  }
+                }
             }).always(function () {
                 delegates[index].resolve();
             });
@@ -467,7 +483,7 @@ var FeaturesViewer = function(opts) {
     var fv = this;
     fv.dispatcher = d3.dispatch("featureSelected", "featureDeselected", "ready", "noDataAvailable", "noDataRetrieved",
         "notFound", "notConfigRetrieved", "regionHighlighted");
-
+    fv.n_source = 0;
     fv.width = 760;
     fv.maxZoomSize = 30;
     fv.selectedFeature = undefined;
@@ -530,6 +546,7 @@ var FeaturesViewer = function(opts) {
     };
 
     fv.load();
+    upgrade_fv(fv);
 };
 
 FeaturesViewer.prototype.getCategoryTitle = function(type) {

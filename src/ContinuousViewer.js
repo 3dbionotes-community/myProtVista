@@ -7,7 +7,7 @@ var d3 = require("d3");
 var _ = require("underscore");
 var ViewerHelper = require("./ViewerHelper");
 var LegendDialog = require("./VariantLegendDialog");
-var VariantFilterDialog = require("./VariantFilterDialog");
+var ContinuousFilterDialog = require("./ContinuousFilterDialog");
 var Evidence = require('./Evidence');
 var Constants = require("./Constants");
 
@@ -116,7 +116,7 @@ var drawVariants = function(variantViewer, bars, frequency, fv, container, catTi
 
     var newCircles = variantCircle.enter().append('circle')
         .attr('r', function(d) {
-            return frequency(0);
+            return 4;//5;//frequency(0);
         })
     ;
 
@@ -132,7 +132,7 @@ var drawVariants = function(variantViewer, bars, frequency, fv, container, catTi
             return variantViewer.xScale(Math.min(d.begin, fv.sequence.length));
         })
         .attr('cy', function(d) {
-            return variantViewer.yScale(d.alternativeSequence.charAt(0));
+            return variantViewer.yScale(d.score);//variantViewer.yScale(d.alternativeSequence.charAt(0));
         })
         .attr('name', function(d) {
             var mutation = d.alternativeSequence === '*' ? 'STOP' :
@@ -190,12 +190,12 @@ var createDataSeries = function(fv, variantViewer, svg, features, series) {
         .orient('right');
 
     mainChart.append('g')
-        .attr('transform','translate(12 ,0)')
+        .attr('transform','translate(25 ,0)')
         .attr('class','variation-y axis')
         .call(yAxis);
 
     mainChart.append('g')
-        .attr('transform','translate(' + (variantViewer.width - 18) + ', 0)')
+        .attr('transform','translate(' + (variantViewer.width - 27) + ', 0)')
         .attr('class','variation-y axis')
         .call(yAxis2);
 
@@ -206,8 +206,27 @@ var createDataSeries = function(fv, variantViewer, svg, features, series) {
     return dataSeries;
 };
 
-var VariantViewer = function(catTitle, features, container, fv, variantHeight, titleContainer) {
-    my_variant_viewer = this;
+
+function build_aaList(features){
+  var max = -1000000000;
+  var min = 1000000000;
+  features.forEach(function(i){
+    if(i.variants && i.variants[0] && i.variants[0].score>max) max = i.variants[0].score;
+    if(i.variants && i.variants[0] && i.variants[0].score<min) min = i.variants[0].score;
+  });
+  max = Math.round(max);
+  min = Math.round(min);
+  var h = Math.round( (max-min)/20 );
+  var n = min;
+  if(n<h && n> 0){
+    n=0;
+  }
+  aaList  = [max,min];
+}
+
+var ContinuousViewer = function(catTitle, features, container, fv, variantHeight, titleContainer) {
+    var flag = false;
+    build_aaList(features);
     var variantViewer = this;
     variantViewer.height = variantHeight;
     variantViewer.width = fv.width;
@@ -217,11 +236,11 @@ var VariantViewer = function(catTitle, features, container, fv, variantHeight, t
     variantViewer.margin = {top:20, bottom:10};
     variantViewer.features = features;
 
-    variantViewer.filter = new VariantFilterDialog(fv, titleContainer, variantViewer);
+    variantViewer.filter = new ContinuousFilterDialog(fv, titleContainer, variantViewer);
 
-    variantViewer.yScale = d3.scale.ordinal()
+    variantViewer.yScale = d3.scale.linear()
         .domain(aaList)
-        .rangePoints([0, variantViewer.height - variantViewer.margin.top - variantViewer.margin.bottom]);
+        .range([0, variantViewer.height-variantViewer.margin.top-variantViewer.margin.bottom]);
 
     var variationPlot = function() {
         var xScale = d3.scale.ordinal(),
@@ -309,4 +328,4 @@ var VariantViewer = function(catTitle, features, container, fv, variantHeight, t
     return this;
 };
 
-module.exports = VariantViewer;
+module.exports = ContinuousViewer;

@@ -164,8 +164,8 @@ var addConsequenceTypes = function() {
     });
 };
 
-var VariantFilterDialog = function(fv, container, variantViewer) {
-    populateFilters(fv);
+var ContinuousFilterDialog = function(fv, container, variantViewer) {
+    //populateFilters(fv);
     addConsequenceTypes();
     addSourceFilters();
 
@@ -175,7 +175,7 @@ var VariantFilterDialog = function(fv, container, variantViewer) {
     var buttons = container.append('div')
         .attr('class','up_pftv_buttons');
 
-    buttons.append('span')
+    /*buttons.append('span')
         //.style('visibility', 'hidden')
         .classed('up_pftv_inner-icon-container', true)
         .append('a')
@@ -185,7 +185,7 @@ var VariantFilterDialog = function(fv, container, variantViewer) {
         .on('click', function(){
             variantFilterDialog.reset();
             variantFilterDialog.variantViewer.updateData(variantFilterDialog.variantViewer.features);
-        });
+        })*/;
 
     _.each(variantFilterDialog.filters, function(filterSet, index) {
         var filterTitle = container.append('h4').text(filterSet.label);
@@ -326,4 +326,4 @@ var filterData = function(filters, data) {
     return newData;
 };
 
-module.exports = VariantFilterDialog;
+module.exports = ContinuousFilterDialog;

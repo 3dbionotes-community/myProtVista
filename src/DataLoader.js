@@ -53,6 +53,7 @@ var DataLoader = function() {
           return $.getJSON(url);
         },
         groupFeaturesByCategory: function(features, sequence, source, includeVariants) {
+            Constants.extend_categories();
             features = groupEvidencesByCode(features);
             var categories = _.groupBy(features, function(d) {
                 return d.category;
