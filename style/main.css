@@ -25,7 +25,7 @@ svg {
 
 .up_pftv_credit:after {
   content: "";
-  background: url(../SVG/info.svg);
+  background: url(/SVG/info.svg);
   background-size: .9em .9em;
   background-repeat: no-repeat;
   display: inline-block;
@@ -761,25 +761,25 @@ a.up_pftv_icon-button:hover {
 }
 
 .up_pftv_icon-download {
-  background: url(../SVG/download.svg);
+  background: url(/SVG/download.svg);
 }
 
 .up_pftv_icon-location {
-  background: url(../SVG/location.svg);
+  background: url(/SVG/location.svg);
 }
 
 .up_pftv_icon-zoom-in {
-  background: url(../SVG/zoom-in.svg);
+  background: url(/SVG/zoom-in.svg);
 }
 
 .up_pftv_icon-zoom-out {
-  background: url(../SVG/zoom-out.svg);
+  background: url(/SVG/zoom-out.svg);
 }
 
 .up_pftv_icon-reset {
-    background: url(../SVG/reset.svg);
+    background: url(/SVG/reset.svg);
 }
 
 .up_pftv_icon-info {
-    background: url(../SVG/info.svg);
+    background: url(/SVG/info.svg);
 }
