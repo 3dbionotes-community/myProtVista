@@ -36,6 +36,41 @@
           "visualizationType": "basic"
         },
         {
+          "name": "EPITOPES",
+          "label": "Epitopes",
+          "visualizationType": "basic"
+        },
+        {
+          "name": "DOMAIN_FAMILIES",
+          "label": "Domain families",
+          "visualizationType": "basic"
+        },
+        {
+          "name": "DISORDERED_REGIONS",
+          "label": "Disordered regions",
+          "visualizationType": "basic"
+        },
+        {
+          "name": "INTERACTING_RESIDUES",
+          "label": "Interacting residues",
+          "visualizationType": "basic"
+        },
+        {
+          "name": "RESIDUE_ASA",
+          "label": "Residue accessibility",
+          "visualizationType": "continuous"
+        },
+        {
+          "name": "PROCHECK",
+          "label": "Structure assessment",
+          "visualizationType": "continuous"
+        },
+        {
+          "name": "STRUCTURE_COVERAGE",
+          "label": "Structure coverage",
+          "visualizationType": "basic"
+        },
+        {
           "name": "PROTEOMICS",
           "label": "Proteomics",
           "visualizationType": "basic"
@@ -49,7 +84,13 @@
           "name": "VARIATION",
           "label": "Variants",
           "visualizationType": "variant"
+        },
+        {
+          "name": "__fake",
+          "label": "__fake",
+          "visualizationType": "basic"
         }
+
   ],
   "trackNames": {
     "chain": {
@@ -215,6 +256,67 @@
     "antigen": {
       "label": "Antibody binding sequences",
       "tooltip": ""
-    }
+    },
+   "mod_res_pho": {
+     "label": "Phosphorylation",
+     "tooltip": 'Modified residues: Addition of a phosphoryl group'
+   },
+   "mod_res_met": {
+     "label": "Methylation",
+     "tooltip": "Modified residues such as phosphorylation, acetylation, acylation, methylation"
+   },
+   "mod_res_ace": {
+     "label": "Acetylation",
+     "tooltip": "Modified residues such as phosphorylation, acetylation, acylation, methylation"
+   },
+   "mod_res_cro": {
+     "label": "Crotonylation",
+     "tooltip": "Modified residues such as phosphorylation, acetylation, acylation, methylation"
+   },
+   "mod_res_cit": {
+     "label": "Citrullination",
+     "tooltip": "Modified residues such as phosphorylation, acetylation, acylation, methylation"
+   },
+   "mod_res_sum": {
+     "label": "SUMOylation",
+     "tooltip": "Modified residues such as phosphorylation, acetylation, acylation, methylation"
+   },
+   "mod_res_ubi": {
+     "label": "Ubiquitination",
+     "tooltip": "Modified residues such as phosphorylation, acetylation, acylation, methylation"
+   },
+   "disprot": {
+     "label": "Disprot",
+     "tooltip": "Disoredered regions collected from the DisProt database'"
+   },
+   "pdb_nmr": {
+     "label": "NMR",
+     "tooltip": "Disoredered regions inferred from NMR srtuctures"
+   },
+   "pdb_xray": {
+     "label": "X-ray",
+     "tooltip": "Disoredered regions inferred from X-ray srtuctures"
+   },
+   "pfam_domain": {
+     "label": "Pfam domain",
+     "tooltip": "Information collected from the Pfam database. The Pfam database is a large collection of protein families, each represented by multiple sequence alignments and hidden Markov models (HMMs)"
+   },
+   "interpro_domain": {
+     "label": "InterPro domain",
+     "tooltip": "Information collected from the InterPro database. The InterPro database is a large collection of protein families, each represented by multiple sequence alignments and hidden Markov models"
+   },
+   "smart_domain": {
+     "label": "SMART domain",
+     "tooltip": "Information collected from the SMART database. The SMART (Simple Modular Architecture Research Tool) compiles genetically mobile domains and domain architectures"
+   },
+   "linear_motif": {
+     "label": "Short linear motif",
+     "tooltip": "Informtaion collected from the Eucariotic Linear Motif (ELM) resource. Short linear motifs are compact protein interaction sites composed of short stretches of adjacent amino acids"
+   },
+   "linear_epitope": {
+      "label": "Linear epitope",
+      "tooltip": "Information collected from the Immune Epitope Database (IEDB). Antibody binding sites"
+   }
+
   }
 }
