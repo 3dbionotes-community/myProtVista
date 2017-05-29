@@ -233,28 +233,28 @@ var createButtons = function(fv, data, container) {
     buttons.append('a')
         .attr('class','up_pftv_icon-button up_pftv_icon-download')
         .attr('title','Download data')
-        .attr('href','#')
+        //.attr('href','#')
         .on('click', function(){
             DownloadDialog.displayDialog(fv, buttons);
         });
     buttons.append('a')
         .attr('class','up_pftv_icon-button up_pftv_icon-location')
         .attr('title','Highlight region')
-        .attr('href','#')
+        //.attr('href','#')
         .on('click', function(){
             HighlightRegionDialog.displayDialog(fv, buttons);
         });
     buttons.append('a')
         .attr('class','up_pftv_icon-button up_pftv_icon-reset')
         .attr('title','Reset')
-        .attr('href','#')
+        //.attr('href','#')
         .on('click', function(){
             resetZoomAndSelection(fv);
         });
     buttons.append('a')
         .attr('class','up_pftv_icon-button up_pftv_icon-zoom-in')
         .attr('title','Zoom in to sequence view')
-        .attr('href','#')
+        //.attr('href','#')
         .on('click', function(){
             if ( d3.select(this).classed('up_pftv_icon-zoom-in')) {
                 zoomIn(fv);
