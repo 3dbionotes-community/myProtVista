@@ -71,6 +71,11 @@
           "visualizationType": "basic"
         },
         {
+          "name": "SEQUENCE_COVERAGE",
+          "label": "Structure coverage",
+          "visualizationType": "basic"
+        },
+        {
           "name": "PROTEOMICS",
           "label": "Proteomics",
           "visualizationType": "basic"
