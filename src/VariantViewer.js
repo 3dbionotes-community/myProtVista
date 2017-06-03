@@ -294,6 +294,7 @@ var VariantViewer = function(catTitle, features, container, fv, variantHeight, t
         } else if (fv.highlight) {
             ViewerHelper.updateHighlight(fv);
         }
+        update_diseases();
     };
 
     this.updateData = function(data) {
