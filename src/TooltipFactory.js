@@ -536,6 +536,7 @@ var TooltipFactory = function() {
                 Tooltip[type].prototype = new Tooltip(fv, catTitle, data, container, coordinates);
                 tooltip = new Tooltip[type]();
             }
+            check_coordinates();
             return tooltip;
         }
     };
