@@ -302,6 +302,10 @@
      "label": "X-ray",
      "tooltip": "Disoredered regions inferred from X-ray srtuctures"
    },
+   "long": {
+     "label": "Long disorder",
+     "tooltip": "Disoredered regions collected from the DisProt database'"
+   },
    "pfam_domain": {
      "label": "Pfam domain",
      "tooltip": "Information collected from the Pfam database. The Pfam database is a large collection of protein families, each represented by multiple sequence alignments and hidden Markov models (HMMs)"
