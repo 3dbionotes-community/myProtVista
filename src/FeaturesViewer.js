@@ -459,6 +459,7 @@ var loadSources = function(opts, dataSources, loaders, delegates, fv) {
                     fv.dispatcher.ready();
                 }
             }).fail(function (e) {
+                console.log( source.category );
                 console.log(e);
                 if(source.category == 'VARIATION'){
                   var features = [];
