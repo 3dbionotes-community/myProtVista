@@ -412,7 +412,6 @@ var initSources = function (opts) {
 var loadSources = function(opts, dataSources, loaders, delegates, fv) {
     fv.initLayout(opts);
     _.each(dataSources, function(source, index) {
-        fv.n_source += 1;
         if (!_.contains(opts.exclusions, source.category)) {
             var url = source.url + opts.uniprotacc;
             url = source.useExtension === true ? url + '.json' : url;
@@ -473,6 +472,8 @@ var loadSources = function(opts, dataSources, loaders, delegates, fv) {
                 }
             }).always(function () {
                 delegates[index].resolve();
+                fv.n_source++;
+                if(fv.n_source == dataSources.length)fv.dispatcher.ready("load_ready");
             });
         } else {
             delegates[index].resolve();

@@ -84,7 +84,11 @@ var ContinuousCategoryViewer = function(category) {
         varCatViewer.features = data;
 
         varCatViewer.variationCountArray = _.map(varCatViewer.features, function(d) {
-            return d.variants.length;
+            if(d.variants.length>0){
+              return d.variants[0].score;
+            }else{
+              return 0;
+            }
         });
 
         varCatViewer.varChart.selectAll(".up_pftv_block-area").remove();
