@@ -81,7 +81,10 @@ var symbolSize = 10,
         pdb_nmr: 'rectangle',
         crosslnk:'triangle',
         linear_motif:'rectangle',
-        linear_epitope:'rectangle'
+        linear_epitope:'rectangle',
+        rama: 'pentagon',
+        omega: 'circle',
+        rota: 'diamond'
     };
 
 var Feature = function() {
