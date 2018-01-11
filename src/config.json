@@ -327,16 +327,16 @@
       "tooltip": "Information collected from the Immune Epitope Database (IEDB). Antibody binding sites"
    },
    "rama": {
-      "label": "Phi/Psi angles",
-      "tooltip": "Ramachandra outliers"
+      "label": "Phi/Psi outliers",
+      "tooltip": "Ramachandra angle outliers"
    },
    "omega": {
-      "label": "Omega angles",
-      "tooltip": "Cis/Trans omega angles"
+      "label": "Omega non-Trans",
+      "tooltip": "non-Trans omega angles"
    },
    "rota": {
-      "label": "Rotamer angles",
-      "tooltip": "Rotamer Chi angles"
+      "label": "Rotamer outliers",
+      "tooltip": "Rotamer Chi angles outliers"
    }
 
 
