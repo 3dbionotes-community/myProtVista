@@ -84,7 +84,9 @@ var symbolSize = 10,
         linear_epitope:'rectangle',
         rama: 'pentagon',
         omega: 'circle',
-        rota: 'diamond'
+        rota: 'diamond',
+        h_bond_flip: 'circle',
+        changed_rotamer: 'diamond'
     };
 
 var Feature = function() {

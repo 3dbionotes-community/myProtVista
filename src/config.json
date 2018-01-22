@@ -62,7 +62,14 @@
         },
         {
           "name": "MOLPROBITY",
-          "label": "Structure assessment",
+          "label": "Mol Probity",
+          "tooltip": "Structure assessment / Mol Probity",
+          "visualizationType": "basic"
+        },
+        {
+          "name": "PDB_REDO",
+          "label": "PDB-REDO",
+          "tooltip": "Structure assessment / PDB-REDO",
           "visualizationType": "basic"
         },
         {
@@ -337,6 +344,14 @@
    "rota": {
       "label": "Rotamer outliers",
       "tooltip": "Rotamer Chi angles outliers"
+   },
+   "h_bond_flip": {
+      "label": "H-bond flip",
+      "tooltip": "H-bond flip"
+   },
+   "changed_rotamer": {
+      "label": "Changed rotamer",
+      "tooltip": "Changed rotamer"
    }
 
 
