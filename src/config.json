@@ -352,8 +352,14 @@
    "changed_rotamer": {
       "label": "Changed rotamer",
       "tooltip": "Changed rotamer"
+   },
+   "completed_res": {
+      "label": "Completed residues",
+      "tooltip": "Completed residues"
+   },
+   "completed_loop": {
+      "label": "Completed loop",
+      "tooltip": "Completed loop"
    }
-
-
   }
 }
