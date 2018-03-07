@@ -81,6 +81,7 @@ var BasicViewer = function(catTitle, features, container, fv) {
     this.update = function() {
         dataSeries.call(series);
         ViewerHelper.updateHighlight(fv);
+        ViewerHelper.multipleHighlight(fv);
     };
 
     this.updateData = function(data) {

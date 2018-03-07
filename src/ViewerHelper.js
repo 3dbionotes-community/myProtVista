@@ -83,6 +83,54 @@ ViewerHelper.updateFeatureHighlightSelector = function(fv) {
     }
 };
 
+ViewerHelper.highlightMultiplePath = function(feature, fv, height) {
+    var aaWidth = fv.xScale(2) - fv.xScale(1);
+    var gapRegion = aaWidth / 2;
+    var width = aaWidth * (feature.end ? feature.end - feature.begin + 1 : 1);
+    var path;
+    path = 'M' + -(gapRegion) + ',0' +
+        'L' + (-gapRegion + width) + ',0' +
+        'L' + (-gapRegion + width) + ',' + height +
+        'L' + -(gapRegion) + ',' + height +
+        'Z';
+    return path;
+};
+
+ViewerHelper.clear_multipleHighlight = function(fv) {
+    if(fv.feature_list.length>0){
+      fv.dispatcher.multipleFeatureDeselected({ feature_list:fv.feature_list });
+      fv.feature_list = [];
+      fv.globalContainer.selectAll('.up_pftv_multiple_highlight').remove();
+    }
+};
+
+ViewerHelper.multipleHighlight = function(fv,flag) {
+    var n = 0;
+    if(!flag)n=300;
+    if(!fv.feature_list.length) return;
+    if(this.updating_multipleHighlight) return;
+    setTimeout(function(){
+      this.updating_multipleHighlight = true;
+      var features = fv.feature_list;
+      var H = fv.globalContainer.selectAll('.up_pftv_highlight');
+      fv.globalContainer.selectAll('.up_pftv_multiple_highlight').remove();
+      H[0].forEach(function(h){
+        features.forEach(function(feature){
+          var xTranslate = fv.xScale(feature.begin);
+          var h_ = h.cloneNode();
+          h.parentElement.append(h_); 
+          d3.select(h_).attr('class','up_pftv_multiple_highlight');
+          d3.select(h_).attr('d', function(){
+              var height = d3.select(this).attr('height');
+              return ViewerHelper.highlightMultiplePath(feature, fv, height);
+          })
+          .attr('transform', 'translate(' + xTranslate + ',0)');
+        });
+      });
+      this.updating_multipleHighlight = false;
+   },n);
+};
+
 ViewerHelper.updateHighlight = function(fv) {
     var feature;
     if (fv.selectedFeature) {
@@ -105,6 +153,8 @@ ViewerHelper.updateHighlight = function(fv) {
 
 ViewerHelper.resetHighlight = function(fv) {
     fv.highlight = undefined;
+    fv.globalContainer.selectAll('.up_pftv_multiple_highlight').remove();
+    fv.feature_list = [];
     fv.globalContainer.selectAll('.up_pftv_highlight')
         .attr('d', 'M-1,-1')
         .attr('transform', 'translate(-1,-1)');
@@ -116,6 +166,8 @@ ViewerHelper.deselectFeature = function(fv) {
 };
 
 ViewerHelper.selectFeature = function(feature, elem, fv) {
+    fv.globalContainer.selectAll('.up_pftv_multiple_highlight').remove();
+    ViewerHelper.clear_multipleHighlight(fv);
     if (feature && elem) {
         fv.highlight = undefined;
         var selectedElem = d3.select(elem);

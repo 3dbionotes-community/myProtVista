@@ -371,6 +371,14 @@ var createAAViewer = function(fv, container, sequence) {
         selectorGroup.datum([{"feature": {"begin": begin, "end": end, "type": 'continuous'}}]).call(selectorSeries);
     };
 
+    aaViewer.updateMultipleFeatureHighlightSelector = function(features) {
+        var data = [];
+        features.forEach(function(feature){
+          data.push({"feature": {"begin": feature.begin, "end": feature.end, "type": 'continuous'}});
+        });
+        selectorGroup.datum(data).call(selectorSeries);
+    };
+
     return aaViewer;
 };
 
@@ -484,7 +492,7 @@ var loadSources = function(opts, dataSources, loaders, delegates, fv) {
 var FeaturesViewer = function(opts) {
     var fv = this;
     fv.dispatcher = d3.dispatch("featureSelected", "featureDeselected", "ready", "noDataAvailable", "noDataRetrieved",
-        "notFound", "notConfigRetrieved", "regionHighlighted");
+        "notFound", "notConfigRetrieved", "regionHighlighted", "multipleFeatureDeselected");
     fv.n_source = 0;
     fv.width = 760;
     fv.maxZoomSize = 30;
@@ -498,6 +506,7 @@ var FeaturesViewer = function(opts) {
     fv.uniprotacc = opts.uniprotacc;
     fv.overwritePredictions = opts.overwritePredictions;
     fv.defaultSource = opts.defaultSources !== undefined ? opts.defaultSources : true;
+    fv.feature_list = [];
 
     fv.load = function() {
         initSources(opts);
@@ -567,6 +576,11 @@ FeaturesViewer.prototype.updateFeatureHighlightSelector = function(begin, end) {
     this.aaViewer2.updateFeatureHighlightSelector(begin, end);
 };
 
+FeaturesViewer.prototype.updateMultipleFeatureHighlightSelector = function(features) {
+    this.aaViewer.updateMultipleFeatureHighlightSelector(features);
+    this.aaViewer2.updateMultipleFeatureHighlightSelector(features);
+};
+
 FeaturesViewer.prototype.getDispatcher = function() {
     return this.dispatcher;
 };
@@ -623,6 +637,25 @@ FeaturesViewer.prototype.selectFeature = function(selection) {
         fv.dispatcher.notFound(selection);
         return undefined;
     }
+};
+
+FeaturesViewer.prototype.multipleHighlight = function(features) {
+    var fv = this;
+    fv.deselectFeature();
+    /*fv.highlight = {begin: begin, end: end, type:'continuous'};
+    if ((fv.xScale(fv.xScale.domain()[0]) > fv.xScale(begin)) ||
+        (fv.xScale(end) > fv.xScale(fv.xScale.domain()[1]))) {
+        zoomOut(fv);
+    }*/
+    fv.feature_list = features;
+    ViewerHelper.multipleHighlight(fv,true);
+    fv.updateMultipleFeatureHighlightSelector(features);
+};
+
+FeaturesViewer.prototype.clear_multipleHighlight = function(features) {
+    var fv = this;
+    ViewerHelper.clear_multipleHighlight(fv);
+    fv.updateMultipleFeatureHighlightSelector([])
 };
 
 FeaturesViewer.prototype.highlightRegion = function(begin, end) {
