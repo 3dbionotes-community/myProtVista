@@ -15,6 +15,7 @@ _includes/
 _posts/
 _sass/
 _site/
+README.conf
 <<<<<<< HEAD
 Gemfile.lock
 =======
