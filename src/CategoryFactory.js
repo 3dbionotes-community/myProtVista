@@ -150,8 +150,18 @@ Category.prototype.setDisabled = function() {
     var category = this;
     category.categoryContainer.attr('class','up_pftv_category up_pftv_category-disabled');
     category.viewerContainer.style('display','none');
-    category.header.on('click', function(){});
+    category.is_disable = true;
+    //category.header.on('click', function(){});
 };
+
+Category.prototype.setEnable = function() {
+    var category = this;
+    category.categoryContainer.attr('class','up_pftv_category');
+    category.viewerContainer.style('display','');
+    category.is_disable = false;
+    //category.header.on('click', function(){});
+};
+
 
 Category.prototype.update = function() {
     var category = this;
