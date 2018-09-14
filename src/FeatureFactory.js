@@ -98,10 +98,11 @@ var Feature = function() {
 
 var FeatureFactory = function() {
     return {
-        getFeature: function(type, aaWidth, height, length) {
+        getFeature: function(type, aaWidth, height, length, shape) {
             var feature,
                 featureType = dictionary[type.toLowerCase()],
                 width = aaWidth * length;
+            if(shape)featureType=shape;
             //0,0 is in the middle, so we first move to the starting of the aa at gapShape,0.
             gapShape = length === 1 ? 0 : width/length/2;
             //again a gap is needed for regions

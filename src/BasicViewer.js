@@ -55,7 +55,8 @@ var BasicViewer = function(catTitle, features, container, fv) {
                             d.type,
                             fv.xScale(2) - fv.xScale(1),
                             basicViewer.layout.getFeatureHeight(),
-                            (d.end) ? d.end - d.begin + 1 : 1);
+                            (d.end) ? d.end - d.begin + 1 : 1,
+                            d.shape);
                     })
                     .attr('transform',function(d) {
                         return 'translate('+fv.xScale(d.begin)+ ',' + basicViewer.layout.getYPos(d) + ')';

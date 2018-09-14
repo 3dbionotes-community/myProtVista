@@ -434,28 +434,38 @@ var loadSources = function(opts, dataSources, loaders, delegates, fv) {
                 }
                 var features = d.features;
                 // group by categories
+                var _exclusions;
+                if( !fv.extend_features_flag ){
+                  _exclusions = ['DOMAINS_AND_SITES', 'MOLECULE_PROCESSING', 'PTM', 'SEQUENCE_INFORMATION', 'STRUCTURAL', 'TOPOLOGY', 'MUTAGENESIS', 'PROTEOMICS', 'VARIATION', 'ANTIGEN'];
+                }else{
+                  _exclusions = opts.exclusions;
+                }
                 if (features.length > 0 && _.has(features[0], 'category')) {
                     features = DataLoader.groupFeaturesByCategory(features, d.sequence, source.source,
-                        !_.contains(opts.exclusions, 'VARIATION'));
+                        !_.contains(_exclusions, 'VARIATION'));
                     features = _.filter(features, function (cat) {
-                        return !_.contains(opts.exclusions, cat[0]);
+                        return !_.contains(_exclusions, cat[0]);
                     });
-                    extend_features(features);
+                    if(fv.extend_features_flag)extend_features(features);
                 } else if (features.length > 0 && features[0].type === 'VARIANT') {
-                    if (_.contains(opts.exclusions, 'VARIATION')) {
+                    if (_.contains(_exclusions, 'VARIATION')) {
                         features = [];
                     } else {
                         features = DataLoader.processVariants(features, d.sequence, source.source);
                     }
-                    extend_variants(features);
+                    if(fv.extend_features_flag)extend_variants(features);
                 } else if (features.length > 0 && features[0].type === 'PROTEOMICS') {
-                    if (_.contains(opts.exclusions, 'PROTEOMICS')) {
+                    if (_.contains(_exclusions, 'PROTEOMICS')) {
                         features = [];
                     } else {
                         features = DataLoader.processProteomics(features);
                     }
-                } else if (features.length > 0) {
-                    features = DataLoader.processUngroupedFeatures(features);
+                } else if (features.length > 0 ) {
+                    if (_.contains(_exclusions, 'ANTIGEN')) {
+                      features = [];
+                    }else{
+                      features = DataLoader.processUngroupedFeatures(features);
+                    };
                 }
                 if(!features_extended && source.category == "FEATURES"){
                   extend_features(features);
@@ -467,11 +477,12 @@ var loadSources = function(opts, dataSources, loaders, delegates, fv) {
                 }
             }).fail(function (e) {
                 console.log( source.category );
+                console.log( source.url );
                 console.log(e);
                 if(source.category == 'VARIATION'){
                   var features = [];
                   features = DataLoader.processVariants(features, fv.sequence, source.source);
-                  extend_variants(features);
+                  if(fv.extend_features_flag)extend_variants(features);
                   if(variants_extended){
                     fv.drawCategories(features, fv);
                     fv.data = fv.data.concat(features);
@@ -507,6 +518,8 @@ var FeaturesViewer = function(opts) {
     fv.overwritePredictions = opts.overwritePredictions;
     fv.defaultSource = opts.defaultSources !== undefined ? opts.defaultSources : true;
     fv.feature_list = [];
+    fv.extend_features_flag = true;
+    if("extend_features_flag" in opts) fv.extend_features_flag = opts.extend_features_flag;
 
     fv.load = function() {
         initSources(opts);
@@ -731,6 +744,11 @@ FeaturesViewer.prototype.drawCategories = function(data, fv) {
     });
     if (!found) {
         var catInfo = Constants.getCategoryInfo(category[0]);
+        if(category[2]){
+          if("visualizationType" in category[2]){
+            catInfo.visualizationType = category[2]['visualizationType'];
+          }
+        }
         var container = fv.container.select('.up_pftv_category_' + category[0]);
         if (!container[0][0]) {
             container = fv.ontheFlyContainer.append('div').classed('up_pftv_category_' + category[0], true);
