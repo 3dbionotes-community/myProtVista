@@ -15,6 +15,8 @@ var Constants = require("./Constants");
 // 'R', 'K', 'H' basic. 'F', 'Y', 'W' aromatic. 'P' imino. '*' stop gained or lost.
 var aaList = ['G', 'A', 'V', 'L', 'I', 'S', 'T', 'C', 'M', 'D', 'N', 'E', 'Q', 'R', 'K', 'H', 'F', 'Y', 'W', 'P', 'd', '*'];
 
+var plotAreaClip_N = 1;
+
 var getPredictionColorScore = function(siftScore, siftPrediction, polyphenScore, polyphenPrediction) {
     var sift = false,
         polyphen = false;
@@ -138,6 +140,8 @@ var drawVariants = function(variantViewer, bars, frequency, fv, container, catTi
         .attr('stroke', function(d) {
             if (d.externalData) {
                 return 'black';
+            } else if ( d.externalFlag){
+                return 'black';
             } else {
                 return 'none';
             }
@@ -152,13 +156,15 @@ var createDataSeries = function(fv, variantViewer, svg, features, series) {
         .attr('transform', 'translate(0,' + variantViewer.margin.top + ')');
 
     var chartArea = mainChart.append('g')
-        .attr('clip-path', 'url(#plotAreaClip)');
+        .attr('clip-path', 'url(#plotAreaClip'+plotAreaClip_N+')');
 
     mainChart.append('clipPath')
-        .attr('id', 'plotAreaClip')
+        .attr('id', 'plotAreaClip'+plotAreaClip_N)
         .append('rect')
         .attr({ width: (variantViewer.width - 20), height: variantViewer.height })
         .attr('transform', 'translate(10, -10)');
+
+    plotAreaClip_N+=1;
 
     var dataSeries = chartArea
         .datum(features)

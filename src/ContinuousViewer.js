@@ -22,6 +22,8 @@ var aaList = ['G', 'A', 'V', 'L', 'I'
     , 'P'
     , '-', '*'];
 
+var plotAreaClip_N = 1;
+
 var getPredictionColorScore = function(siftScore, siftPrediction, polyphenScore, polyphenPrediction) {
     var sift = false, polyphen = false;
     if ((polyphenPrediction !== undefined) && (polyphenPrediction !== 'unknown')) {
@@ -168,13 +170,15 @@ var createDataSeries = function(fv, variantViewer, svg, features, series) {
         .attr('transform','translate(0,' + variantViewer.margin.top + ')');
 
     var chartArea = mainChart.append('g')
-        .attr('clip-path', 'url(#plotAreaClip)');
+        .attr('clip-path', 'url(#plotAreaClipContinuous'+plotAreaClip_N+')');
 
     mainChart.append('clipPath')
-        .attr('id', 'plotAreaClip')
+        .attr('id', 'plotAreaClipContinuous'+plotAreaClip_N)
         .append('rect')
         .attr({ width: (variantViewer.width -20) , height: variantViewer.height})
         .attr('transform','translate(10, -10)');
+
+    plotAreaClip_N += 1;
 
     var dataSeries = chartArea
         .datum(features)
