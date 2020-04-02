@@ -61,6 +61,11 @@
           "visualizationType": "continuous"
         },
         {
+          "name": "EM_RESOLUTION",
+          "label": "EM resolution",
+          "visualizationType": "continuous"
+        },
+        {
           "name": "MOLPROBITY",
           "label": "Mol Probity",
           "tooltip": "Structure assessment / Mol Probity",
