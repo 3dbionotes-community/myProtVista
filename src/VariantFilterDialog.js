@@ -166,7 +166,8 @@ var addConsequenceTypes = function() {
 };
 
 var VariantFilterDialog = function(fv, container, variantViewer) {
-    populateFilters(fv);
+    // Commented to cancel filters
+    // TODO: Uncomment and make filters dynamic: populateFilters(fv);
     addConsequenceTypes();
     addSourceFilters();
 
