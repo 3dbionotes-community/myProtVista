@@ -63,7 +63,7 @@
         {
           "name": "EM_RESOLUTION",
           "label": "EM resolution",
-          "visualizationType": "continuous"
+          "visualizationType": "basic"
         },
         {
           "name": "MOLPROBITY",
