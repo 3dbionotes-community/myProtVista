@@ -47,7 +47,7 @@
     "fs": "0.0.1-security",
     "gulp-dependency-install": "0.0.8",
     "gulpfile-install": "^0.2.0",
-    "jquery": "^2.2.4",
+    "jquery": "^3.5.0",
     "jszip": "^3.1.5",
     "npm-install-all": "^1.1.21",
     "path": "^0.12.7",
