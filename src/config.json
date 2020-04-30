@@ -61,8 +61,8 @@
           "visualizationType": "continuous"
         },
         {
-          "name": "EM_RESOLUTION",
-          "label": "EM resolution",
+          "name": "EM_VALIDATION",
+          "label": "em validation",
           "visualizationType": "basic"
         },
         {
