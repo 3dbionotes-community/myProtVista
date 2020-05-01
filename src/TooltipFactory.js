@@ -252,6 +252,31 @@ Tooltip.prototype.addEvidences = function(evidences) {
         });
     });
 };
+Tooltip.prototype.addLegend = function(legend) {
+    var tooltip = this;
+
+    if (legend === undefined){
+        return;
+    }
+    // if legend is a function
+    if (legend instanceof Function){
+        legend = legend();
+    }
+
+    // We expect [[color, label],...]
+    legend.forEach( function(legendItem) {
+        const color = legendItem[0];
+        const label = legendItem[1];
+
+        var typeRow = tooltip.table.append('tr')
+          .attr('class', 'up_pftv_evidence-col');
+        typeRow.append('td')
+          .text(label);
+        typeRow.append('td')
+          .text(color);
+
+    });
+};
 
 Tooltip.prototype.addBlast = function() {
     var tooltip = this;
@@ -277,6 +302,7 @@ Tooltip.prototype.addBlast = function() {
 var BasicTooltipViewer = function(tooltip) {
     tooltip.addEvidences(tooltip.data.evidences);
     addXRefs(tooltip, tooltip.data.xrefs);
+    tooltip.addLegend(tooltip.data.legend)
     tooltip.addBlast();
 };
 
