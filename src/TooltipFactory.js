@@ -253,7 +253,7 @@ Tooltip.prototype.addEvidences = function(evidences) {
     });
 };
 Tooltip.prototype.addLegend = function(legend) {
-    var tooltip = this;
+    let tooltip = this;
 
     if (legend === undefined){
         return;
@@ -263,19 +263,21 @@ Tooltip.prototype.addLegend = function(legend) {
         legend = legend();
     }
 
+    let legendHTMLContent = "";
+
     // We expect [[color, label],...]
     legend.forEach( function(legendItem) {
         const color = legendItem[0];
         const label = legendItem[1];
-
-        var typeRow = tooltip.table.append('tr')
-          .attr('class', 'up_pftv_evidence-col');
-        typeRow.append('td')
-          .text(label);
-        typeRow.append('td')
-          .text(color);
-
+        legendHTMLContent+= '<span style="background-color:' + color + '">' + label + "</span>";
     });
+
+    let typeRow = tooltip.table.append('tr')
+      .attr('class', 'up_pftv_evidence-col');
+    typeRow.append('td')
+      .text("Legend:");
+    let legendTd = typeRow.append('td');
+    legendTd.text(legendHTMLContent);
 };
 
 Tooltip.prototype.addBlast = function() {
