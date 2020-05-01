@@ -253,7 +253,7 @@ Tooltip.prototype.addEvidences = function(evidences) {
     });
 };
 Tooltip.prototype.addLegend = function(legend) {
-    let tooltip = this;
+    var tooltip = this;
 
     if (legend === undefined){
         return;
@@ -264,21 +264,20 @@ Tooltip.prototype.addLegend = function(legend) {
         legend = legend();
     };
 
-    let legendHTMLContent = "";
+    var typeRow = tooltip.table.append('tr').attr('class', 'up_pftv_evidence-col');
+    typeRow.append('td').text("Legend:");
+
+    var legendTd = typeRow.append('td');
 
     // We expect [[color, label],...]
     legend.forEach( function(legendItem) {
         const color = legendItem[0];
         const label = legendItem[1];
-        const newSpan = '<span style="background-color:' + color + '">' + label + '</span>';
-        legendHTMLContent = legendHTMLContent + newSpan;
+        var span = legendTd.append('span');
+        span.text(label);
+        span.style("background-color", color);
+
     });
-
-    let typeRow = tooltip.table.append('tr').attr('class', 'up_pftv_evidence-col');
-    typeRow.append('td').text("Legend:");
-
-    let legendTd = typeRow.append('td');
-    legendTd.text(legendHTMLContent);
 };
 
 Tooltip.prototype.addBlast = function() {
