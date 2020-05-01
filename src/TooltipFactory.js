@@ -305,7 +305,7 @@ Tooltip.prototype.addCustomLines = function() {
     var tooltip = this;
 
     if (tooltip.data.extentTooltip !== undefined){
-        tooltip.data.extendToolTip(tooltip);
+        tooltip.data.extendTooltip(tooltip);
     };
 };
 
