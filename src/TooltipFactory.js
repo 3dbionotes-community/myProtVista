@@ -301,11 +301,21 @@ Tooltip.prototype.addBlast = function() {
     }
 };
 
+Tooltip.prototype.addCustomLines = function() {
+    var tooltip = this;
+
+    if (tooltip.data.extentTooltip !== undefined){
+        tooltip.data.extendToolTip(tooltip);
+    };
+};
+
 var BasicTooltipViewer = function(tooltip) {
     tooltip.addEvidences(tooltip.data.evidences);
     addXRefs(tooltip, tooltip.data.xrefs);
-    tooltip.addLegend(tooltip.data.legend)
+    tooltip.addLegend(tooltip.data.legend);
     tooltip.addBlast();
+    tooltip.addCustomLines();
+
 };
 
 var AntigenTooltipViewer = function(tooltip) {
@@ -320,6 +330,7 @@ var AntigenTooltipViewer = function(tooltip) {
     tooltip.addEvidences(tooltip.data.evidences);
     addXRefs(tooltip, tooltip.data.xrefs);
     tooltip.addBlast();
+    tooltip.addCustomLines();
 };
 
 var AlternativeTooltipViewer = function(tooltip, change, field) {
@@ -337,6 +348,7 @@ var AlternativeTooltipViewer = function(tooltip, change, field) {
     tooltip.addEvidences(tooltip.data.evidences);
     addXRefs(tooltip, tooltip.data.xrefs);
     tooltip.addBlast();
+    tooltip.addCustomLines();
 };
 
 var addPredictions = function(tooltip, data) {
@@ -516,6 +528,8 @@ var VariantTooltipViewer = function(tooltip) {
     _.each(tooltip.data.externalData, function(data, key) {
         addSection(tooltip, data, data.ftId, data.description, data.evidences, data.xrefs, key);
     });
+
+    tooltip.addCustomLines();
 };
 
 Tooltip.basic = function() {
