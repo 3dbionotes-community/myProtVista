@@ -257,11 +257,12 @@ Tooltip.prototype.addLegend = function(legend) {
 
     if (legend === undefined){
         return;
-    }
+    };
+
     // if legend is a function
     if (legend instanceof Function){
         legend = legend();
-    }
+    };
 
     let legendHTMLContent = "";
 
@@ -269,13 +270,13 @@ Tooltip.prototype.addLegend = function(legend) {
     legend.forEach( function(legendItem) {
         const color = legendItem[0];
         const label = legendItem[1];
-        legendHTMLContent+= '<span style="background-color:' + color + '">' + label + "</span>";
+        const newSpan = '<span style="background-color:' + color + '">' + label + '</span>';
+        legendHTMLContent = legendHTMLContent + newSpan;
     });
 
-    let typeRow = tooltip.table.append('tr')
-      .attr('class', 'up_pftv_evidence-col');
-    typeRow.append('td')
-      .text("Legend:");
+    let typeRow = tooltip.table.append('tr').attr('class', 'up_pftv_evidence-col');
+    typeRow.append('td').text("Legend:");
+
     let legendTd = typeRow.append('td');
     legendTd.text(legendHTMLContent);
 };
