@@ -309,6 +309,14 @@ Tooltip.prototype.addCustomLines = function() {
     };
 };
 
+Tooltip.prototype.addSimpleRow = function(label, value) {
+    var tooltip = this;
+
+    let simpleRow = tooltip.table.append('tr');
+    simpleRow.append('td').text(label);
+    simpleRow.append('td').text(vale);
+};
+
 var BasicTooltipViewer = function(tooltip) {
     tooltip.addEvidences(tooltip.data.evidences);
     addXRefs(tooltip, tooltip.data.xrefs);
