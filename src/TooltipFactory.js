@@ -314,7 +314,7 @@ Tooltip.prototype.addSimpleRow = function(label, value) {
 
     let simpleRow = tooltip.table.append('tr');
     simpleRow.append('td').text(label);
-    simpleRow.append('td').text(vale);
+    simpleRow.append('td').text(value);
 };
 
 var BasicTooltipViewer = function(tooltip) {
