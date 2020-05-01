@@ -312,7 +312,7 @@ Tooltip.prototype.addCustomLines = function() {
 Tooltip.prototype.addSimpleRow = function(label, value) {
     var tooltip = this;
 
-    let simpleRow = tooltip.table.append('tr');
+    var simpleRow = tooltip.table.append('tr');
     simpleRow.append('td').text(label);
     simpleRow.append('td').text(value);
 };
