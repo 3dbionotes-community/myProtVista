@@ -2,7 +2,19 @@
 
 Original project: https://github.com/ebi-uniprot/ProtVista
 
+## Requirements
+
+- Node: v8
+
+## Build
+
+```
+$ npm install
+$ node_modules/.bin/gulp build
+```
+
 ## License
+
 This software is licensed under the Apache 2 license, quoted below.
 
 Copyright (c) 2018, CNB-CSIC
