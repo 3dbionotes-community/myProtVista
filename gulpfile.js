@@ -23,7 +23,6 @@ var concat = require('gulp-concat');
 
 // testing
 var mocha = require('gulp-mocha');
-var mochaPhantomJS = require('gulp-mocha-phantomjs');
 var env = require('gulp-env');
 
 // code coverage
@@ -96,17 +95,6 @@ gulp.task('init-test-reports', ['clean-test-reports'], function() {
 
 gulp.task('clean-test-reports', function(cb) {
     del(['reports'], cb);
-});
-
-
-gulp.task('test-dom', ['build-test'], function () {
-    return gulp
-    .src('test/index.html')
-    .pipe(mochaPhantomJS({
-        phantomjs:{
-            ignoreSslErrors: true
-        }
-    }));
 });
 
 // browserify debug
