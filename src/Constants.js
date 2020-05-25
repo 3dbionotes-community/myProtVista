@@ -33,7 +33,14 @@ var uniprotSources = [
         category: 'ANTIGEN'
     }
 ];
-var allSources = uniprotSources.slice(0);
+var otherSources = [
+    {
+        url: 'https://my-json-server.typicode.com/pconesa/demo/',
+        source:'cnbc',
+        category: 'VARIATION"'
+    }
+];
+var allSources = [].concat(uniprotSources, otherSources);
 var externalSource;
 var allCategories = Config.categories;
 var allTrackNames = Config.trackNames;
