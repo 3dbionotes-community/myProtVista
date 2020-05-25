@@ -35,6 +35,7 @@ var uniprotSources = [
 ];
 var otherSources = [
     {
+        // To change later with /lrs/variants/
         url: 'https://my-json-server.typicode.com/pconesa/demo/',
         source:'cnbc',
         category: 'VARIATION"'
