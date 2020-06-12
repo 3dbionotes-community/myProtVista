@@ -1,7 +1,7 @@
 {
   "name": "ProtVista",
   "description": "Protein feature viewer (uniprot annotation, variants, proteomics, ...)",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "homepage": "https://github.com/3dbionotes-community/myProtVista",
   "repository": {
     "type": "git",
