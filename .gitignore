@@ -17,3 +17,4 @@ _sass/
 _site/
 README.conf
 Gemfile.lock
+build/
