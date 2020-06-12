@@ -61,9 +61,9 @@
           "visualizationType": "continuous"
         },
         {
-          "name": "EM_RESOLUTION",
-          "label": "EM resolution",
-          "visualizationType": "continuous"
+          "name": "EM_VALIDATION",
+          "label": "em validation",
+          "visualizationType": "basic"
         },
         {
           "name": "MOLPROBITY",

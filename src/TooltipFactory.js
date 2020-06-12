@@ -252,6 +252,33 @@ Tooltip.prototype.addEvidences = function(evidences) {
         });
     });
 };
+Tooltip.prototype.addLegend = function(legend) {
+    var tooltip = this;
+
+    if (legend === undefined){
+        return;
+    };
+
+    // if legend is a function
+    if (legend instanceof Function){
+        legend = legend();
+    };
+
+    var typeRow = tooltip.table.append('tr').attr('class', 'up_pftv_evidence-col');
+    typeRow.append('td').text("Legend:");
+
+    var legendTd = typeRow.append('td');
+
+    // We expect [[color, label],...]
+    legend.forEach( function(legendItem) {
+        const color = legendItem[0];
+        const label = legendItem[1];
+        var span = legendTd.append('span');
+        span.text(label);
+        span.style("background-color", color);
+
+    });
+};
 
 Tooltip.prototype.addBlast = function() {
     var tooltip = this;
@@ -274,10 +301,29 @@ Tooltip.prototype.addBlast = function() {
     }
 };
 
+Tooltip.prototype.addCustomLines = function() {
+    var tooltip = this;
+
+    if (tooltip.data.extendTooltip !== undefined){
+        tooltip.data.extendTooltip(tooltip);
+    };
+};
+
+Tooltip.prototype.addSimpleRow = function(label, value) {
+    var tooltip = this;
+
+    var simpleRow = tooltip.table.append('tr');
+    simpleRow.append('td').text(label);
+    simpleRow.append('td').text(value);
+};
+
 var BasicTooltipViewer = function(tooltip) {
     tooltip.addEvidences(tooltip.data.evidences);
     addXRefs(tooltip, tooltip.data.xrefs);
+    tooltip.addLegend(tooltip.data.legend);
     tooltip.addBlast();
+    tooltip.addCustomLines();
+
 };
 
 var AntigenTooltipViewer = function(tooltip) {
@@ -292,6 +338,7 @@ var AntigenTooltipViewer = function(tooltip) {
     tooltip.addEvidences(tooltip.data.evidences);
     addXRefs(tooltip, tooltip.data.xrefs);
     tooltip.addBlast();
+    tooltip.addCustomLines();
 };
 
 var AlternativeTooltipViewer = function(tooltip, change, field) {
@@ -309,6 +356,7 @@ var AlternativeTooltipViewer = function(tooltip, change, field) {
     tooltip.addEvidences(tooltip.data.evidences);
     addXRefs(tooltip, tooltip.data.xrefs);
     tooltip.addBlast();
+    tooltip.addCustomLines();
 };
 
 var addPredictions = function(tooltip, data) {
@@ -488,6 +536,8 @@ var VariantTooltipViewer = function(tooltip) {
     _.each(tooltip.data.externalData, function(data, key) {
         addSection(tooltip, data, data.ftId, data.description, data.evidences, data.xrefs, key);
     });
+
+    tooltip.addCustomLines();
 };
 
 Tooltip.basic = function() {
