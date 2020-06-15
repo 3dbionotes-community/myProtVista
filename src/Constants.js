@@ -34,14 +34,12 @@ var uniprotSources = [
     }
 ];
 var otherSources = [
-/*
     {
         // To change later with /lrs/variants/
-        url: 'https://my-json-server.typicode.com/pconesa/demo/',
+        url: '/lrs/variants/',
         source:'cnbc',
         category: 'VARIATION"'
     }
-*/
 ];
 var allSources = [].concat(uniprotSources, otherSources);
 var externalSource;
