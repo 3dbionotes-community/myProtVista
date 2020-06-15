@@ -36,7 +36,7 @@ var uniprotSources = [
 var otherSources = [
     {
         // To change later with /lrs/variants/
-        url: '/lrs/variants/',
+        url: 'http://rinchen-dos.cnb.csic.es:8600/features/variants/Genomic_Variants_CNCB/',
         source:'cnbc',
         category: 'VARIATION"'
     }
