@@ -20,7 +20,7 @@ var aaList = ['G', 'A', 'V', 'L', 'I'
     , 'R', 'K', 'H'
     , 'F', 'Y', 'W'
     , 'P'
-    , '-', '*'];
+    , '-', '*', '?'];
 
 var plotAreaClip_N = 1;
 
