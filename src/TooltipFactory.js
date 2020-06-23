@@ -273,9 +273,13 @@ Tooltip.prototype.addLegend = function(legend) {
     legend.forEach( function(legendItem) {
         const color = legendItem[0];
         const label = legendItem[1];
+        // add the color
         var span = legendTd.append('span');
-        span.text(label);
-        span.style("background-color", color);
+        span.style("background-color", color, "border-color", "black");
+        // Add teh text
+        var text = legendTd.append('span');
+        text.text(" = " + label);
+        legendTd.append("br");
 
     });
 };
