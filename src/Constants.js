@@ -36,9 +36,10 @@ var uniprotSources = [
 var otherSources = [
     {
         // To change later with /lrs/variants/
-        url: '/lrs/variants/',
+        url: '/ws/lrs/features/variants/Genomic_Variants_CNCB/{ID}/',
         source:'cnbc',
-        category: 'VARIATION"'
+        category: 'VARIATION',
+        replace: true
     }
 ];
 var allSources = [].concat(uniprotSources, otherSources);

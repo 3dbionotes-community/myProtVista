@@ -421,7 +421,9 @@ var loadSources = function(opts, dataSources, loaders, delegates, fv) {
     fv.initLayout(opts);
     _.each(dataSources, function(source, index) {
         if (!_.contains(opts.exclusions, source.category)) {
-            var url = source.url + opts.uniprotacc;
+
+            var url = source.url
+            url = source.replace === true ? url.replace("{ID}", opts.uniprotacc) : url + opts.uniprotacc;
             url = source.useExtension === true ? url + '.json' : url;
             var dataLoader = DataLoader.get(url);
             loaders.push(dataLoader);
