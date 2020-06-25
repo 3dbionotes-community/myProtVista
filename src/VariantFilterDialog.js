@@ -28,7 +28,7 @@ var defaultFilterCasePrediction = {
     on: true,
     properties: {
         'alternativeSequence': /[^*]/,
-        'sourceType': [Evidence.variantSourceType.lss, null],
+        'sourceType': [Evidence.variantSourceType.uniprot, null],
         'externalData': function(variant) {
             if (!variant.sourceType) {
                 return _.some(variant.externalData, function(data) {
