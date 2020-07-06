@@ -10,7 +10,7 @@ Original project: https://github.com/ebi-uniprot/ProtVista
 
 ```
 $ npm install
-$ node_modules/.bin/gulp build
+$ npm run build
 ```
 
 ## License
