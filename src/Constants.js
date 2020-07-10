@@ -35,9 +35,8 @@ var uniprotSources = [
 ];
 var otherSources = [
     {
-        // To change later with /lrs/variants/
         url: '/ws/lrs/features/variants/Genomic_Variants_CNCB/{ID}/',
-        source:'cnbc',
+        source:'CNCB',
         category: 'VARIATION',
         replace: true
     }
