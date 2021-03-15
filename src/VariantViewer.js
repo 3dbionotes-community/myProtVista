@@ -72,7 +72,7 @@ var getVariantsFillColor = function(fv, d, extDatum, externalPrediction, predict
     if (d.externalData) {
         return 'black';
     } else {
-        return LegendDialog.othersColor;
+        return 'grey';
     }
 };
 
