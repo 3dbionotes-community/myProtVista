@@ -126,6 +126,7 @@ var drawVariants = function(variantViewer, bars, frequency, fv, container, catTi
             return variantViewer.xScale(Math.min(d.begin, fv.sequence.length));
         })
         .attr('cy', function(d) {
+            if (undefined === d.alternativeSequence) return variantViewer.yScale("?");
             return variantViewer.yScale(d.alternativeSequence.charAt(0));
         })
         .attr('name', function(d) {
