@@ -247,6 +247,7 @@ ViewerHelper.addEventsClassAndTitle = function(catTitle, elements, fv, container
                 var initial = d.alternativeSequence.charAt(0);
                 initial = initial === '*' ? 'loss' : initial;
                 initial = d.alternativeSequence === 'del' ? 'deletion' : initial;
+                initial = initial === '?' ? 'other' : initial;
                 fv.globalContainer.selectAll('g.up_pftv_aa_' + initial + ' line').style('opacity', 1);
             }
         })
@@ -256,6 +257,7 @@ ViewerHelper.addEventsClassAndTitle = function(catTitle, elements, fv, container
                 var initial = d.alternativeSequence.charAt(0);
                 initial = initial === '*' ? 'loss' : initial;
                 initial = d.alternativeSequence === 'del' ? 'deletion' : initial;
+                initial = initial === '?' ? 'other' : initial;
                 fv.globalContainer.selectAll('g.up_pftv_aa_' + initial + ' line').style('opacity', 0.4);
             }
         });
