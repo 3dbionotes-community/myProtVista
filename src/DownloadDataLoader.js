@@ -37,12 +37,16 @@ var DownloadDataLoader = function() {
                     if (loader.getResponseHeader('Content-type').indexOf(format) !== -1) {
                         zip.file(getFileName(accession, source, format), d);
                     } else {
-                        zip.file(getFileName(accession, source, format), 'Unable to retrieve the data in the required' +
-                            'format ' + format + '.');
+                        console.warn('Download annotations error.Unable to retrieve the data in the required' +
+                        'format ' + format + '.');
+                        // zip.file(getFileName(accession, source, format), 'Unable to retrieve the data in the required' +
+                        //     'format ' + format + '.');
                     }
                 }).fail(function (e) {
-                    zip.file(getFileName(accession, source, format), 'Unable to retrieve the data at this time.' +
-                        ' Please try again later.');
+                    console.warn('Download annotations error. Unable to retrieve the data at this time.' +
+                        accession + '' + source + '' + format);
+                    // zip.file(getFileName(accession, source, format), 'Unable to retrieve the data at this time.' +
+                        // ' Please try again later.');
                 }).always(function() {
                     delegates[index].resolve();
                 });
