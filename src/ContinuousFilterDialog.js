@@ -121,6 +121,7 @@ var populateFilters = function(fv) {
 };
 
 var addSourceFilters = function() {
+    if (!populated) return;
     _.each(Constants.getDataSources(), function(dataSource) {
         if (dataSource.source !== Constants.getUniProtSource()) {
             var exist = _.find(filters[1].cases, function(aCase) {
